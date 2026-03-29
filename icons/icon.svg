@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4F46E5" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+    
+    <!-- Shadow for depth -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Base outer plate, expanding closer to edges (leaving 8px padding) -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#bgGrad)" filter="url(#shadow)" />
+
+  <!-- Four colorful internal "tabs" representing containers -->
+  <g transform="translate(20, 20)">
+    <!-- Top-Left Green -->
+    <rect x="2" y="2" width="38" height="38" rx="10" fill="#10B981" filter="url(#shadow)" />
+    <!-- Top-Right Orange -->
+    <rect x="48" y="2" width="38" height="38" rx="10" fill="#F59E0B" filter="url(#shadow)" />
+    <!-- Bottom-Left Sky -->
+    <rect x="2" y="48" width="38" height="38" rx="10" fill="#0EA5E9" filter="url(#shadow)" />
+    <!-- Bottom-Right Rose -->
+    <rect x="48" y="48" width="38" height="38" rx="10" fill="#E11D48" filter="url(#shadow)" />
+  </g>
+
+  <!-- Central "Auto/Refresh" element to represent "Auto" routing -->
+  <circle cx="64" cy="64" r="22" fill="#FFFFFF" filter="url(#shadow)" />
+  
+  <!-- Stylized sync arrows inside the center circle -->
+  <g stroke="#4F46E5" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Top Arrow Arc -->
+    <path d="M 53 58 A 12 12 0 0 1 73 58" />
+    <!-- Arrowhead top -->
+    <path d="M 73 52 L 73 58 L 67 58" />
+
+    <!-- Bottom Arrow Arc -->
+    <path d="M 75 70 A 12 12 0 0 1 55 70" />
+    <!-- Arrowhead bottom -->
+    <path d="M 55 76 L 55 70 L 61 70" />
+  </g>
+</svg>

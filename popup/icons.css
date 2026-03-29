@@ -27,6 +27,10 @@
   position: relative;
 }
 
+.icon-picker[open] {
+  z-index: 30;
+}
+
 .icon-picker summary {
   list-style: none;
 }

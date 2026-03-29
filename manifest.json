@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Auto Multi-Account Containers",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "Manage Firefox containers with per-container proxy, cleanup, and shortcuts.",
   "permissions": [
     "contextualIdentities",
@@ -41,13 +41,18 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
+      "32": "icons/icon-32.png",
       "48": "icons/icon-48.png",
+      "64": "icons/icon-64.png",
       "96": "icons/icon-96.png"
     }
   },
   "icons": {
+    "32": "icons/icon-32.png",
     "48": "icons/icon-48.png",
-    "96": "icons/icon-96.png"
+    "64": "icons/icon-64.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
   },
   "commands": {
     "open-slot-1": {

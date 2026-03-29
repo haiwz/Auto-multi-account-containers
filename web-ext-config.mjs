@@ -15,6 +15,7 @@ export default {
     ".amo-upload-uuid",
     ".gitignore",
     "artifacts/**",
+    "amo",
     "amo/**",
     "node_modules/**",
     ".DS_Store",

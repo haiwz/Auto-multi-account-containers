@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto Multi-Account Containers</title>
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="popup/icons.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="hero-top">
+          <div>
+            <p class="eyebrow" data-i18n="heroEyebrow">Firefox MV3</p>
+            <h1 data-i18n="heroTitle">Auto Multi-Account Containers</h1>
+            <p class="hero-copy" data-i18n="heroCopy">Manage container identities, per-container proxy, cleanup, and shortcut slots.</p>
+          </div>
+          <label class="language-control">
+            <span data-i18n="languageLabel">Language</span>
+            <select id="language-select"></select>
+          </label>
+        </div>
+      </header>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2 data-i18n="panelCreateTitle">Create managed container</h2>
+        </div>
+        <form id="create-form" class="create-form">
+          <label>
+            <span data-i18n="nameLabel">Name</span>
+            <input type="text" name="name" maxlength="64" placeholder="Work" data-i18n-placeholder="createNamePlaceholder" required />
+          </label>
+          <label>
+            <span data-i18n="colorLabel">Color</span>
+            <select name="color"></select>
+          </label>
+          <label>
+            <span data-i18n="iconLabel">Icon</span>
+            <div id="create-icon-picker"></div>
+          </label>
+          <button type="submit" class="primary" data-i18n="createButton">Create</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2 data-i18n="panelImportTitle">Import existing container</h2>
+        </div>
+        <div class="import-row">
+          <select id="import-select"></select>
+          <button id="import-button" type="button" data-i18n="importButton">Import</button>
+        </div>
+      </section>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <section id="profiles" class="profiles"></section>
+    </main>
+
+    <script src="shared/constants.js"></script>
+    <script src="shared/utils.js"></script>
+    <script src="popup/translations.js"></script>
+    <script src="popup/i18n.js"></script>
+    <script src="popup/icons.js"></script>
+    <script src="popup/render.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

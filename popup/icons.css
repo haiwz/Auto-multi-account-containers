@@ -1,0 +1,112 @@
+.container-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: var(--icon-color, currentColor);
+  mask-image: var(--icon-mask);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-image: var(--icon-mask);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+.icon-chip {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.icon-picker-field {
+  display: block;
+}
+
+.icon-picker {
+  position: relative;
+}
+
+.icon-picker summary {
+  list-style: none;
+}
+
+.icon-picker summary::-webkit-details-marker {
+  display: none;
+}
+
+.icon-picker-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(6, 14, 26, 0.8);
+  cursor: pointer;
+}
+
+.icon-picker-current {
+  width: 22px;
+  height: 22px;
+}
+
+.icon-picker-caret {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg) translateY(-2px);
+}
+
+.icon-picker[open] .icon-picker-caret {
+  transform: rotate(-135deg) translateY(-1px);
+}
+
+.app-shell[data-busy="true"] .icon-picker {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.icon-picker-grid {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  width: 220px;
+  padding: 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: rgba(10, 18, 32, 0.98);
+  box-shadow: var(--shadow);
+}
+
+.icon-option {
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.icon-option:hover,
+.icon-option.selected {
+  border-color: var(--line-strong);
+  background: rgba(79, 209, 197, 0.12);
+}
+
+.icon-option .container-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-option .container-icon.selected {
+  transform: scale(1.05);
+}

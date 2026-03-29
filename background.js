@@ -31,6 +31,8 @@ async function handleMessage(message) {
       return deleteManagedProfile(message.payload);
     case MESSAGE_TYPES.CLEAN_PROFILE:
       return cleanProfile(message.payload?.profileId);
+    case MESSAGE_TYPES.OPEN_EXTERNAL_LINK:
+      return openManagedProfileTab(message.payload);
     default:
       return undefined;
   }
@@ -40,9 +42,8 @@ async function handleCommand(command) {
   await ensureStateLoaded();
   const profiles = Object.values(backgroundState.profiles);
   const openProfile = profiles.find((item) => commandNameForSlot("open", item.openShortcutSlot) === command);
-  const openContainer = await getContainerIfExists(openProfile?.currentCookieStoreId);
-  if (openContainer) {
-    await browser.tabs.create({ cookieStoreId: openProfile.currentCookieStoreId });
+  if (openProfile) {
+    await openManagedProfileTab({ profileId: openProfile.profileId });
     return;
   }
 

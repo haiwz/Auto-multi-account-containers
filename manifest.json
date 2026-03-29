@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Auto Multi-Account Containers",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Manage Firefox containers with per-container proxy, cleanup, and shortcuts.",
   "permissions": [
     "contextualIdentities",
@@ -35,9 +35,17 @@
       "background/state.js",
       "background/profiles.js",
       "background/cleanup.js",
+      "background/open.js",
       "background.js"
     ]
   },
+  "protocol_handlers": [
+    {
+      "protocol": "ext+automac",
+      "name": "Auto Multi-Account Containers",
+      "uriTemplate": "/external-open.html?link=%s"
+    }
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

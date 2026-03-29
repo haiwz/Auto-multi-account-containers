@@ -3,8 +3,11 @@ const OPEN_SLOT_COUNT = 9;
 const CLEAN_SLOT_COUNT = 9;
 const OPEN_SLOT_PREFIX = "open-slot-";
 const CLEAN_SLOT_PREFIX = "clean-slot-";
+const EXTERNAL_OPEN_PROTOCOL = "ext+automac";
+const EXTERNAL_OPEN_ACTION = "open";
 const RECONCILE_DELAY_MS = 500;
 const AUTO_CLEAN_BLOCK_MS = 1500;
+const ALLOWED_EXTERNAL_URL_PROTOCOLS = Object.freeze(["http:", "https:"]);
 const PROXY_MODES = Object.freeze({
   INHERIT: "inherit",
   CUSTOM: "custom"
@@ -63,7 +66,8 @@ const MESSAGE_TYPES = Object.freeze({
   UPDATE_PROFILE: "profile.update",
   REORDER_PROFILE: "profile.reorder",
   DELETE_PROFILE: "profile.delete",
-  CLEAN_PROFILE: "profile.clean"
+  CLEAN_PROFILE: "profile.clean",
+  OPEN_EXTERNAL_LINK: "profile.openExternalLink"
 });
 const OPEN_COMMANDS = Object.freeze(
   Array.from({ length: OPEN_SLOT_COUNT }, (_, index) => `${OPEN_SLOT_PREFIX}${index + 1}`)

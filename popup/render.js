@@ -231,6 +231,7 @@ function renderProfileCard(profile, index, total) {
             <input class="auto-clean" type="checkbox" ${profile.autoClean ? 'checked="checked"' : ""} />
           </label>
           ${renderShortcutFields(profile)}
+          ${renderExternalOpenFields(profile)}
         </div>
         <div class="profile-actions">
           <button type="button" class="primary" data-action="save">${t("saveButton")}</button>

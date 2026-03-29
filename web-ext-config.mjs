@@ -22,6 +22,7 @@ export default {
     "npm-debug.log*",
     "package-lock.json",
     "package.json",
+    "raycast/**",
     "RELEASE.md",
     "web-ext-config.mjs"
   ],

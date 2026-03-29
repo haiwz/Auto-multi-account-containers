@@ -28,6 +28,19 @@ function parseSlot(value) {
   return Number.isInteger(parsed) && parsed > 0 ? parsed : null;
 }
 
+function hasUriScheme(value) {
+  return /^[a-z][a-z0-9+.-]*:/i.test(String(value || "").trim());
+}
+
+function decodeUriComponentSafe(value) {
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+    void error;
+    return value;
+  }
+}
+
 function isValidSlot(slot, maxSlots) {
   return Number.isInteger(slot) && slot >= 1 && slot <= maxSlots;
 }
@@ -92,6 +105,95 @@ async function getContainerIfExists(cookieStoreId) {
     }
     throw error;
   }
+}
+
+function normalizeExternalTargetUrl(value) {
+  const rawValue = String(value || "").trim();
+  if (!rawValue) {
+    throw new Error("Target URL is required");
+  }
+
+  const candidates = [rawValue];
+  const decodedValue = decodeUriComponentSafe(rawValue);
+  if (decodedValue !== rawValue) {
+    candidates.push(decodedValue);
+  }
+
+  for (const candidate of candidates) {
+    const normalizedCandidate = hasUriScheme(candidate) ? candidate : `https://${candidate}`;
+    try {
+      const parsedUrl = new URL(normalizedCandidate);
+      if (!ALLOWED_EXTERNAL_URL_PROTOCOLS.includes(parsedUrl.protocol)) {
+        throw new Error("Unsupported target URL protocol");
+      }
+      return parsedUrl.toString();
+    } catch (error) {
+      void error;
+    }
+  }
+
+  throw new Error("Invalid target URL");
+}
+
+function buildExternalOpenLink(reference, targetUrl = "") {
+  const link = new URL(`${EXTERNAL_OPEN_PROTOCOL}://${EXTERNAL_OPEN_ACTION}`);
+  if (reference?.profileId) {
+    link.searchParams.set("profileId", String(reference.profileId).trim());
+  }
+  if (reference?.slot !== undefined && reference?.slot !== null) {
+    link.searchParams.set("slot", String(reference.slot));
+  }
+  if (reference?.cookieStoreId) {
+    link.searchParams.set("cookieStoreId", String(reference.cookieStoreId).trim());
+  }
+  if (targetUrl) {
+    link.hash = normalizeExternalTargetUrl(targetUrl);
+  }
+  return link.toString();
+}
+
+function parseExternalOpenEnvelope(rawLink) {
+  const handledLink = String(rawLink || "").trim();
+  if (!handledLink) {
+    throw new Error("Missing external link payload");
+  }
+
+  let envelope;
+  try {
+    envelope = new URL(handledLink);
+  } catch (error) {
+    void error;
+    throw new Error("Invalid external link payload");
+  }
+
+  if (envelope.protocol !== `${EXTERNAL_OPEN_PROTOCOL}:`) {
+    throw new Error("Unsupported external link protocol");
+  }
+
+  const action = envelope.hostname || envelope.pathname.replace(/^\/+/, "");
+  if (action && action !== EXTERNAL_OPEN_ACTION) {
+    throw new Error("Unsupported external link action");
+  }
+
+  const profileId = String(
+    envelope.searchParams.get("profileId") || envelope.searchParams.get("profile") || ""
+  ).trim();
+  const cookieStoreId = String(envelope.searchParams.get("cookieStoreId") || "").trim();
+  const slot = parseSlot(envelope.searchParams.get("slot"));
+  if (!profileId && !cookieStoreId && slot === null) {
+    throw new Error("Container reference is required");
+  }
+
+  const rawTarget =
+    String(envelope.searchParams.get("url") || "").trim() ||
+    decodeUriComponentSafe(envelope.hash.replace(/^#/, "").trim());
+
+  return {
+    profileId: profileId || null,
+    cookieStoreId: cookieStoreId || null,
+    slot,
+    url: normalizeExternalTargetUrl(rawTarget)
+  };
 }
 
 function sanitizeProfileInput(payload) {

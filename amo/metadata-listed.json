@@ -1,0 +1,22 @@
+{
+  "default_locale": "en-US",
+  "name": {
+    "en-US": "Auto Multi-Account Containers",
+    "zh-CN": "自动多账户容器",
+    "zh-TW": "自動多帳戶容器"
+  },
+  "summary": {
+    "en-US": "Manage Firefox containers with per-container proxy, cleanup, and shortcut slots.",
+    "zh-CN": "为 Firefox 容器提供独立代理、快捷打开、一键清理和自动重建。",
+    "zh-TW": "為 Firefox 容器提供獨立代理、快速開啟、一鍵清理與自動重建。"
+  },
+  "categories": {
+    "firefox": [
+      "privacy-security",
+      "tabs"
+    ]
+  },
+  "version": {
+    "license": "MPL-2.0"
+  }
+}

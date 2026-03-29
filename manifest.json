@@ -1,0 +1,108 @@
+{
+  "manifest_version": 3,
+  "name": "Auto Multi-Account Containers",
+  "version": "1.0.3",
+  "description": "Manage Firefox containers with per-container proxy, cleanup, and shortcuts.",
+  "permissions": [
+    "contextualIdentities",
+    "cookies",
+    "proxy",
+    "tabs",
+    "storage",
+    "browsingData"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "auto-mac@extension",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  },
+  "background": {
+    "scripts": [
+      "shared/constants.js",
+      "shared/utils.js",
+      "background/state.js",
+      "background/profiles.js",
+      "background/cleanup.js",
+      "background.js"
+    ]
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    }
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "commands": {
+    "open-slot-1": {
+      "description": "Open the container bound to slot 1"
+    },
+    "open-slot-2": {
+      "description": "Open the container bound to slot 2"
+    },
+    "open-slot-3": {
+      "description": "Open the container bound to slot 3"
+    },
+    "open-slot-4": {
+      "description": "Open the container bound to slot 4"
+    },
+    "open-slot-5": {
+      "description": "Open the container bound to slot 5"
+    },
+    "open-slot-6": {
+      "description": "Open the container bound to slot 6"
+    },
+    "open-slot-7": {
+      "description": "Open the container bound to slot 7"
+    },
+    "open-slot-8": {
+      "description": "Open the container bound to slot 8"
+    },
+    "open-slot-9": {
+      "description": "Open the container bound to slot 9"
+    },
+    "clean-slot-1": {
+      "description": "Clean the container bound to slot 1"
+    },
+    "clean-slot-2": {
+      "description": "Clean the container bound to slot 2"
+    },
+    "clean-slot-3": {
+      "description": "Clean the container bound to slot 3"
+    },
+    "clean-slot-4": {
+      "description": "Clean the container bound to slot 4"
+    },
+    "clean-slot-5": {
+      "description": "Clean the container bound to slot 5"
+    },
+    "clean-slot-6": {
+      "description": "Clean the container bound to slot 6"
+    },
+    "clean-slot-7": {
+      "description": "Clean the container bound to slot 7"
+    },
+    "clean-slot-8": {
+      "description": "Clean the container bound to slot 8"
+    },
+    "clean-slot-9": {
+      "description": "Clean the container bound to slot 9"
+    }
+  }
+}

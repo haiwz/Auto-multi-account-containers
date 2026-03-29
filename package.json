@@ -1,0 +1,18 @@
+{
+  "name": "auto-multi-account-containers",
+  "private": true,
+  "version": "1.0.3",
+  "description": "Firefox MV3 container extension with per-container proxy, cleanup, and shortcut slots.",
+  "scripts": {
+    "build": "web-ext build",
+    "build:verbose": "web-ext build --verbose",
+    "lint:ext": "web-ext lint",
+    "run": "web-ext run",
+    "sign:listed": "web-ext sign --channel=listed --amo-metadata=amo/metadata-listed.json",
+    "sign:unlisted": "web-ext sign --channel=unlisted",
+    "verify:manifest": "node -e \"JSON.parse(require('node:fs').readFileSync('manifest.json', 'utf8')); console.log('manifest ok');\""
+  },
+  "devDependencies": {
+    "web-ext": "^8.0.0"
+  }
+}

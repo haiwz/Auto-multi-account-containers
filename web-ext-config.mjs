@@ -13,6 +13,8 @@ export default {
   artifactsDir: "artifacts",
   ignoreFiles: [
     ".amo-upload-uuid",
+    ".release-secrets.local",
+    ".release-secrets.example",
     ".gitignore",
     "artifacts/**",
     "amo",
@@ -24,6 +26,8 @@ export default {
     "package.json",
     "raycast/**",
     "RELEASE.md",
+    "scripts",
+    "scripts/**",
     "web-ext-config.mjs"
   ],
   build: {

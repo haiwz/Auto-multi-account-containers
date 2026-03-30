@@ -21,6 +21,28 @@ requirements here:
 npm install
 ```
 
+## Local Credential File
+
+Create a one-time local file at `.release-secrets.local` in the repository root.
+It is ignored by Git and excluded from extension packages.
+
+You can start from the committed example:
+
+```bash
+cp .release-secrets.example .release-secrets.local
+```
+
+Then fill in:
+
+```bash
+WEB_EXT_API_KEY="your-amo-jwt-issuer"
+WEB_EXT_API_SECRET="your-amo-jwt-secret"
+GH_TOKEN="your-github-token"
+```
+
+All release scripts below will load `.release-secrets.local` automatically, so
+future conversations do not need you to re-export the variables in each shell.
+
 ## Build a Package
 
 ```bash
@@ -32,24 +54,38 @@ Artifacts are written to `artifacts/` by `web-ext-config.mjs`.
 ## Sign for Self-Distribution
 
 ```bash
-export WEB_EXT_API_KEY="your-amo-jwt-issuer"
-export WEB_EXT_API_SECRET="your-amo-jwt-secret"
 npm run sign:unlisted
 ```
 
-This produces a signed `.xpi` in `artifacts/`. Install that signed package in
-Firefox to avoid the temporary-add-on restart behavior.
+This produces a signed `.xpi` in `artifacts/` and also copies it to the stable
+name `artifacts/auto_multi-account_containers-{version}-signed.xpi`. Install
+that signed package in Firefox to avoid the temporary-add-on restart behavior.
 
 ## Submit a Listed Version to AMO
 
 ```bash
-export WEB_EXT_API_KEY="your-amo-jwt-issuer"
-export WEB_EXT_API_SECRET="your-amo-jwt-secret"
 npm run sign:listed
 ```
 
 The first listed submission uses `amo/metadata-listed.json`, which includes the
 required summary, categories, and license metadata for AMO.
+
+## Publish GitHub Release
+
+Preferred flow:
+
+```bash
+npm run release:github
+```
+
+If `GH_TOKEN` or `GITHUB_TOKEN` is present, `gh` will use it directly and
+won't require browser login. The script expects these files to already exist:
+
+- `artifacts/auto_multi-account_containers-{version}.zip`
+- `artifacts/auto_multi-account_containers-{version}-signed.xpi`
+
+If no GitHub token is set, the script falls back to the local `gh` login
+session and exits with an explicit error when `gh auth status` is not valid.
 
 ## Before Signing an Update
 
